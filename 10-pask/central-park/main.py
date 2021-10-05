@@ -13,7 +13,7 @@ data = pandas.read_csv("central_park_squirrels.csv")
 # hghlght_cin_sq = len(data[data["Highlight Fur Color"] == "Cinnamon"])
 # hghlght_gray_sq = len(data[data["Highlight Fur Color"] == "Gray"])
 # hghlght_white_sq = len(data[data["Highlight Fur Color"] == "White"])
-# hghlght_unkwn_sq = 3023 - (hghlght_white_sq + hghlght_gray_sq + hghlght_cin_sq + hghlght_black_sq)
+# hghlght_unkwn_sq = len(data) - (hghlght_white_sq + hghlght_gray_sq + hghlght_cin_sq + hghlght_black_sq)
 
 running_true_sq = len(data[data["Running"] == True])
 running_false_sq = len(data[data["Running"] == False])
