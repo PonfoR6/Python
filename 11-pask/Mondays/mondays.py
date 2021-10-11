@@ -19,7 +19,7 @@ if datetime.today().isoweekday() == 7:
 
 
 # MY_EMAIL = "testspm55@gmail.com"
-# PASSWORD = "kazkokiaspam"
+# PASSWORD = ""
 # now = dt.datetime.now()
 # weekday = now.weekday()
 #
