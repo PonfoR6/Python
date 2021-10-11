@@ -27,6 +27,7 @@ if difficulty == "easy":
             print(f"✓")
             break
         if livesRemaining == 0:
+            print(f"Out of lives. The Number was {n}")
             break
 
 if difficulty == "medium":
@@ -46,6 +47,7 @@ if difficulty == "medium":
             print("✓")
             break
         if livesRemaining == 0:
+            print(f"Out of lives. The Number was {n}")
             break
 
 if difficulty == "hard":
@@ -66,6 +68,7 @@ if difficulty == "hard":
             print("✓")
             break
         if livesRemaining == 0:
+            print(f"Out of lives. The Number was {n}")
             break
 
 if difficulty == "impossible":
