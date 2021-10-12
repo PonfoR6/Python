@@ -6,9 +6,9 @@ from question_bank import QuestionBank
 
 question_bank = []
 for items in range(len(question_data)):
-    quest = question_data[items]
-    txt = quest["question"]
-    ans = quest["correct_answer"]
+    question = question_data[items]
+    txt = question["question"]
+    ans = question["correct_answer"]
     test_q = Questions(txt, ans)
     question_bank.append(test_q)
 
