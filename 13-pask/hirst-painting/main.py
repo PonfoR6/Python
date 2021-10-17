@@ -33,4 +33,3 @@ from colorgram import *
 colors = colorgram.extract('image.jpg', 8)
 
 print(colors)
-
