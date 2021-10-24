@@ -5,27 +5,34 @@ import random
 class QuestionBank:
 
     def __init__(self, list_of_questions):
-        self.taskai = 0
+        self.pts = 0
         self.list_of_questions = list_of_questions
         self.q_number = 0
 
-    def kitas_klausimas(self):
+    def other_questions(self):
         f_question = self.list_of_questions[self.q_number]
         self.q_number += 1
         user_answer = input(f"{self.q_number}, {f_question.text} T/F?")
         if user_answer == f_question.answer:
-            self.taskai += 1
-            print(f"geras atsakymas, your score is: {self.taskai}")
+            self.pts += 1
+            print(f"correct! your score is: {self.pts}")
+        elif user_answer == "T" and f_question.answer == "True":
+            self.pts += 1
+            print(f"correct! your score is: {self.pts}")
+        elif user_answer == "F" and f_question.answer == "False":
+            self.pts += 1
+            print(f"correct! your score is: {self.pts}")
         else:
-            print("netinkamas atsakymas")
+            print("wrong.")
 
-    def pabaiga_ir_taskai(self):
+    def end_and_points(self):
+
         if self.q_number < len(self.list_of_questions):
             return True
         else:
-            print(f"Visu tasku suma {self.taskai}")
-            if self.taskai > 7:
-                print("wow nusimanai kompiuteriu istorija!")
-            elif self.taskai < 2:
-                print("aiskiai vadovelio neskaitei")
+            print(f"Total sum of all points {self.pts}")
+            if self.pts > 7:
+                print("wow you really know your computer history!")
+            elif self.pts < 2:
+                print("I see you haven't done your homework")
             return False
