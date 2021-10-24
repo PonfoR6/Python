@@ -16,10 +16,10 @@ class QuestionBank:
         if user_answer == f_question.answer:
             self.pts += 1
             print(f"correct! your score is: {self.pts}")
-        elif user_answer == "T" and f_question.answer == "True":
+        elif user_answer == "T" and f_question.answer == "True" or user_answer == "true" and f_question.answer == "True":
             self.pts += 1
             print(f"correct! your score is: {self.pts}")
-        elif user_answer == "F" and f_question.answer == "False":
+        elif user_answer == "F" and f_question.answer == "False" or user_answer == "false" and f_question.answer == "False":
             self.pts += 1
             print(f"correct! your score is: {self.pts}")
         else:
