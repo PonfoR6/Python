@@ -6,18 +6,18 @@ delay = 0.1
 score = 0
 high_score = 0
 
-wn = turtle.Screen()
-wn.title("Snake Game")
-wn.bgcolor("blue")
-wn.setup(width=600, height=600)
-wn.tracer(0)
+screen = turtle.Screen()
+screen.title("Snake Game")
+screen.bgcolor("pink")
+screen.setup(width=600, height=600)
+screen.tracer(0)
 
-head = turtle.Turtle()
-head.shape("square")
-head.color("white")
-head.penup()
-head.goto(0, 0)
-head.direction = "Stop"
+tim = turtle.Turtle()
+tim.shape("square")
+tim.color("white")
+tim.penup()
+tim.goto(0, 0)
+tim.direction = "Stop"
 
 food = turtle.Turtle()
 colors = random.choice(['red', 'green', 'black'])
@@ -39,55 +39,55 @@ pen.write("Score : 0  High Score : 0", align="center",
           font=("Roboto", 24, "bold"))
 
 
-def goup():
-    if head.direction != "down":
-        head.direction = "up"
+def fwd():
+    if tim.direction != "down":
+        tim.direction = "up"
 
 
-def godown():
-    if head.direction != "up":
-        head.direction = "down"
+def back():
+    if tim.direction != "up":
+        tim.direction = "down"
 
 
-def goleft():
-    if head.direction != "right":
-        head.direction = "left"
+def left():
+    if tim.direction != "right":
+        tim.direction = "left"
 
 
-def goright():
-    if head.direction != "left":
-        head.direction = "right"
+def right():
+    if tim.direction != "left":
+        tim.direction = "right"
 
 
-def move():
-    if head.direction == "up":
-        y = head.ycor()
-        head.sety(y + 20)
-    if head.direction == "down":
-        y = head.ycor()
-        head.sety(y - 20)
-    if head.direction == "left":
-        x = head.xcor()
-        head.setx(x - 20)
-    if head.direction == "right":
-        x = head.xcor()
-        head.setx(x + 20)
+def motion():
+    if tim.direction == "up":
+        y = tim.ycor()
+        tim.sety(y + 20)
+    if tim.direction == "down":
+        y = tim.ycor()
+        tim.sety(y - 20)
+    if tim.direction == "left":
+        x = tim.xcor()
+        tim.setx(x - 20)
+    if tim.direction == "right":
+        x = tim.xcor()
+        tim.setx(x + 20)
 
 
-wn.listen()
-wn.onkeypress(goup, "w")
-wn.onkeypress(godown, "s")
-wn.onkeypress(goleft, "a")
-wn.onkeypress(goright, "d")
+screen.listen()
+screen.onkeypress(fwd, "w")
+screen.onkeypress(back, "s")
+screen.onkeypress(left, "a")
+screen.onkeypress(right, "d")
 
 segments = []
 
 while True:
-    wn.update()
-    if head.xcor() > 290 or head.xcor() < -290 or head.ycor() > 290 or head.ycor() < -290:
+    screen.update()
+    if tim.xcor() > 290 or tim.xcor() < -290 or tim.ycor() > 290 or tim.ycor() < -290:
         time.sleep(1)
-        head.goto(0, 0)
-        head.direction = "Stop"
+        tim.goto(0, 0)
+        tim.direction = "Stop"
         colors = random.choice(['red', 'blue', 'green'])
         shapes = random.choice(['square', 'circle'])
         for segment in segments:
@@ -98,7 +98,7 @@ while True:
         pen.clear()
         pen.write("Score : {} High Score : {} ".format(
             score, high_score), align="center", font=("Roboto", 24, "bold"))
-    if head.distance(food) < 20:
+    if tim.distance(food) < 20:
         x = random.randint(-270, 270)
         y = random.randint(-270, 270)
         food.goto(x, y)
@@ -106,7 +106,7 @@ while True:
         new_segment = turtle.Turtle()
         new_segment.speed(0)
         new_segment.shape("square")
-        new_segment.color("orange")  # tail colour
+        new_segment.color("green")
         new_segment.penup()
         segments.append(new_segment)
         delay -= 0.001
@@ -122,15 +122,15 @@ while True:
         y = segments[index - 1].ycor()
         segments[index].goto(x, y)
     if len(segments) > 0:
-        x = head.xcor()
-        y = head.ycor()
+        x = tim.xcor()
+        y = tim.ycor()
         segments[0].goto(x, y)
-    move()
+    motion()
     for segment in segments:
-        if segment.distance(head) < 20:
+        if segment.distance(tim) < 20:
             time.sleep(1)
-            head.goto(0, 0)
-            head.direction = "stop"
+            tim.goto(0, 0)
+            tim.direction = "stop"
             colors = random.choice(['red', 'blue', 'green'])
             shapes = random.choice(['square', 'circle'])
             for segment in segments:
@@ -144,4 +144,4 @@ while True:
                 score, high_score), align="center", font=("Roboto", 24, "bold"))
     time.sleep(delay)
 
-wn.mainloop()
+screen.mainloop()
