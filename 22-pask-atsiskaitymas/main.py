@@ -95,21 +95,6 @@ def login():
     logged_in = Label(window2, text=" hi:) ")
     logged_in.pack()
 
-
-# def encrypt_word():
-#     text = encryption_entry.get()
-#     s = 4
-#     result = ""
-#     for i in range(len(text)):
-#         char = text[i]
-#     if char.isupper():
-#         result += chr((ord(char) + s - 65) % 26 + 65)
-#     else:
-#         result += chr((ord(char) + s - 97) % 26 + 97)
-#
-#     encryption_entry.delete(0, END)
-#     encryption_entry.insert(0, result)
-
 def encrypt():
     result = ""
     text = encryption_entry.get()
