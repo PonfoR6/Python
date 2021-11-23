@@ -92,16 +92,51 @@ def login():
     window2.title("Main page")
     window2.geometry("100x100")
 
-    logged_in = Label(window2, text=" go away ")
+    logged_in = Label(window2, text=" hi:) ")
     logged_in.pack()
+
+
+# def encrypt_word():
+#     text = encryption_entry.get()
+#     s = 4
+#     result = ""
+#     for i in range(len(text)):
+#         char = text[i]
+#     if char.isupper():
+#         result += chr((ord(char) + s - 65) % 26 + 65)
+#     else:
+#         result += chr((ord(char) + s - 97) % 26 + 97)
+#
+#     encryption_entry.delete(0, END)
+#     encryption_entry.insert(0, result)
+
+def encrypt():
+    result = ""
+    text = encryption_entry.get()
+    s = 4
+
+    # traverse text
+    for i in range(len(text)):
+        char = text[i]
+
+        # Encrypt uppercase characters
+        if char.isupper():
+            result += chr((ord(char) + s - 65) % 26 + 65)
+
+        # Encrypt lowercase characters
+        else:
+            result += chr((ord(char) + s - 97) % 26 + 97)
+
+    encryption_entry.delete(0, END)
+    encryption_entry.insert(0, result)
 
 
 window = Tk()
 window.title("Password Manager")
 window.config(padx=25, pady=50)
 
-website_label = Label(text='Website:')
-website_label.grid(row=1, column=0, sticky="W")
+lbl_web = Label(text='Website:')
+lbl_web.grid(row=1, column=0, sticky="W")
 
 web_entry = Entry(font=("Roboto", 15))
 web_entry.grid(row=1, column=1, columnspan=2, sticky="EW")
@@ -131,5 +166,11 @@ gen_password.grid(row=3, column=2, sticky="EW")
 
 login_button = Button(text="Login", command=login)
 login_button.grid(row=5, column=1, columnspan=2, sticky="EW")
+
+encryption_entry = Entry(font=("Roboto", 15))
+encryption_entry.grid(row=6, column=1, columnspan=2, sticky="EW")
+
+encryption_btn = Button(text="Encrypt word", command=encrypt)
+encryption_btn.grid(row=6, column=2, columnspan=2, sticky="W")
 
 window.mainloop()
