@@ -15,20 +15,30 @@ class UserSmallInfo(BaseModel):
         orm_mode = True
 
 
+class BlogSettingsCreate(BaseModel):
+    is_active: bool
+
+
 class BlogCreate(BaseModel):
     title: str
     body: str
-    tags: str
+    settings: BlogSettingsCreate
+
+
+class SettingsSmallInfo(BaseModel):
+    id: int
+    title: str
 
 
 class Blog(BaseModel):
     id: int
     title: str
     body: Optional[str] = None
-    tags: Optional[str] = None
     owner_id = int
     owner: Optional[UserSmallInfo]
 
+    settings_id: int
+    settings:SettingsSmallInfo
     # Add owner here
 
     class Config:
