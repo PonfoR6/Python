@@ -16,7 +16,8 @@ class UserSmallInfo(BaseModel):
 
 
 class CarSettingsCreate(BaseModel):
-    pass
+    mileage: int
+    consumption: int
 
 
 class CarCreate(BaseModel):
@@ -37,3 +38,19 @@ class Car(BaseModel):
     owner_id = int
     owner: Optional[UserSmallInfo]
 
+    settings_id: int
+    settings: SettingsSmallInfo
+
+    class Config:
+        orm_mode = True
+
+
+class User(BaseModel):
+    id: int
+    email: str
+    password: str
+
+    cars: List[Car] = []
+
+    class Config:
+        orm_mode = True

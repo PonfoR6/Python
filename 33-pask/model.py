@@ -17,6 +17,8 @@ class PostSettings(Base):
     __tablename__ = 'postsettings'
 
     id = Column(Integer, primary_key=True, index=True)
+    consumption = Column(Integer)
+    mileage = Column(Integer)
 
     car = relationship('Car', back_populates='settings', uselist=False)
 
@@ -27,8 +29,6 @@ class Car(Base):
     id = Column(Integer, primary_key=True, index=True)
     brand = Column(String)
     model = Column(String)
-    consumption = Column(Integer)
-    distance_travelled = Column(Integer)
 
     owner_id = Column(Integer, ForeignKey('users.id'))
     owner = relationship('User', back_populates='cars')
