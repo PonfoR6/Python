@@ -16,8 +16,8 @@ class UserSmallInfo(BaseModel):
 
 
 class CarSettingsCreate(BaseModel):
-    mileage: int
-    consumption: int
+    mileage: Optional[int]
+    consumption: Optional[int]
 
 
 class CarCreate(BaseModel):

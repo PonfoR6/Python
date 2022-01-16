@@ -1,7 +1,6 @@
-from typing import List
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session, selectinload
-import model
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+import repository.car_repository
 import schemas
 from database import get_db
 
@@ -12,40 +11,20 @@ router = APIRouter(
 
 
 @router.get('', )
-def all(mileage: int, consumption: int, db: Session = Depends(get_db)):
-    if mileage < 0 or consumption < 0:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Enter valid amount (number must be 0 or higher)"
-        )
-    return db.query(model.Car) \
-        .join(model.PostSettings) \
-        .options(selectinload(model.Car.owner)) \
-        .options(selectinload(model.Car.settings)) \
-        .filter(model.PostSettings.consumption == consumption, model.PostSettings.mileage == mileage).all()
+def all_router(mileage: int, consumption: int, db: Session = Depends(get_db)):
+    return repository.car_repository.all(mileage, consumption, db)
 
 
 @router.post('/create/{user_id}')
-def create_car(request: schemas.CarCreate, user_id: int, db: Session = Depends(get_db)):
-    new_settings = model.PostSettings(
-        consumption=request.settings.consumption,
-        mileage=request.settings.mileage
-    )
-    db.add(new_settings)
-    db.commit()
-    db.refresh(new_settings)
-    new_car = model.Car(
-        brand=request.brand,
-        model=request.model,
-        settings_id=new_settings.id,
-        owner_id=user_id
-    )
-    db.add(new_car)
-    db.commit()
-    db.refresh(new_car)
-    return new_car
+def create_car_router(request: schemas.CarCreate, user_id: int, db: Session = Depends(get_db)):
+    return repository.car_repository.create_car(request, user_id, db)
 
 
 @router.put('/update/{car_id}')
-def update_car(car_id: int, request: schemas.CarCreate, db: Session):
-    post = db.query(model.Car).filter(model.Car.id == car_id)
+def update_car_router(id: int, request: schemas.Car, db: Session):
+    return repository.car_repository.update_car(id, request, db)
+
+
+@router.delete('/update/{id}')
+def delete_car_router(id: int, db: Session = Depends(get_db)):
+    return repository.car_repository.delete_car(id, db)

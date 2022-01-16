@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 import model
 import schemas
@@ -27,3 +27,18 @@ def create_user(request: schemas.UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
     return new_user
+
+
+# @router.put('/update/{user_id}')
+# def update_user(id: int, request: schemas.User, db: Session):
+#     user = db.query(model.User).filter(model.User.id == id)
+#
+#     if not user.first():
+#         raise HTTPException(
+#             status_code=status.HTTP_404_NOT_FOUND,
+#             detail=f"User with id-{id} not found"
+#         )
+#     user.update(request.dict())
+#     db.commit()
+#
+#     return user.first()
