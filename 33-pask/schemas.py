@@ -1,56 +1,88 @@
-from typing import List, Optional
 from pydantic import BaseModel
+
+
+class UserInfo(BaseModel):
+    id: int
+    email: str
+    password: str
+
+    class Config:
+        orm_mode = True
 
 
 class UserCreate(BaseModel):
     email: str
     password: str
 
+    class Config:
+        orm_mode = True
 
-class UserSmallInfo(BaseModel):
+
+class BrandCreate(BaseModel):
+    brand: str
+
+
+class BrandInfo(BaseModel):
     id: int
-    email: str
+    brand: str
 
     class Config:
         orm_mode = True
 
 
-class CarSettingsCreate(BaseModel):
-    mileage: Optional[int]
-    consumption: Optional[int]
+class ModelCreate(BaseModel):
+    model: str
+
+
+class ModelInfo(BaseModel):
+    id: int
+    model: str
+
+    class Config:
+        orm_mode = True
+
+
+class SettingsCreate(BaseModel):
+    distance: str
+    consumption: str
+    user_id: int
+
+
+class SettingsInfo(BaseModel):
+    id: int
+    consumption: str
+    distance: str
+
+    class Config:
+        orm_mode = True
 
 
 class CarCreate(BaseModel):
-    brand: str
-    model: str
-    settings: CarSettingsCreate
+    year: int
+    color: str
+    brand_id: int
+    model_id: int
+    users_id: int
 
 
-class SettingsSmallInfo(BaseModel):
+class CarInfo(BaseModel):
     id: int
-    brand: str
-
-
-class Car(BaseModel):
-    id: int
-    brand: str
-    model: Optional[str] = None
-    owner_id = int
-    owner: Optional[UserSmallInfo]
-
-    settings_id: int
-    settings: SettingsSmallInfo
+    year: int
+    color: str
 
     class Config:
         orm_mode = True
 
 
-class User(BaseModel):
+class MileageInfo(BaseModel):
     id: int
-    email: str
-    password: str
+    mileage_max: int
 
-    cars: List[Car] = []
 
     class Config:
         orm_mode = True
+
+
+class MileageCreate(BaseModel):
+    mileage_max: int
+    car_id: int
