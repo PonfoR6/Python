@@ -4,14 +4,14 @@ import schemas
 import model
 
 
-def get_all(db: Session):
+def get(db: Session):
     return db.query(model.User).all()
 
 
 def create_user(request: schemas.UserCreate, db: Session):
     new_user = model.User(
-        first_name=request.email,
-        last_name=request.password
+        email=request.email,
+        password=request.password
     )
     db.add(new_user)
     db.commit()
@@ -20,7 +20,7 @@ def create_user(request: schemas.UserCreate, db: Session):
     return new_user
 
 
-def update_user(id: int, request: schemas.UserInfo, db: Session):
+def update_user(id: int, request: schemas.UserCreate, db: Session):
     user = db.query(model.User).filter(model.User.id == id)
 
     if not user.first:

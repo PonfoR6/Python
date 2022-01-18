@@ -4,7 +4,7 @@ import schemas
 import model
 
 
-def get_all(db: Session):
+def get(db: Session):
     return db.query(model.Car).all()
 
 

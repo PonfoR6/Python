@@ -4,14 +4,13 @@ import schemas
 import model
 
 
-
-def get_all(db: Session):
+def get(db: Session):
     return db.query(model.Model).all()
 
 
-def create_model(request: schemas.ModelCreate, db: Session):
+def create_model(request: schemas.ModelInfo, db: Session):
     new_model = model.Model(
-        model=request.model
+        car_model=request.model
     )
     db.add(new_model)
     db.commit()

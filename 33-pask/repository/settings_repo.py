@@ -4,14 +4,14 @@ import schemas
 import model
 
 
-def get_all(db: Session):
+def get(db: Session):
     return db.query(model.Settings).all()
 
 
 def create_settings(request: schemas.SettingsCreate, db: Session):
     global id
     new_settings = model.Settings(
-        odometer=request.distance,
+        distance=request.distance,
         consumption=request.consumption,
         user_id=request.user_id
     )
